@@ -1,0 +1,12 @@
+/* SpeechArea.css */
+.textarea {
+    width: 90%;
+    height: 70%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 16px;
+  }
+  

@@ -57,7 +57,8 @@ class SpeechPage extends Component {
   }
 
   handleSubmit() {
-    const apiUrl = 'http://127.0.0.1:10000/generate_speech'; // Correct API endpoint
+    // const apiUrl = 'http://127.0.0.1:10000/generate_speech'; // Correct API endpoint
+    const apiUrl = 'https://political-speech-generator-5fln.onrender.com/generate_speech';
     const { speechTextareaValue, requirementsTextareaValue } = this.state;
 
     if (speechTextareaValue.trim() === '') {
@@ -103,7 +104,8 @@ class SpeechPage extends Component {
 
   handleTranslate() {
     const { generatedSpeech, selectedLanguage } = this.state;
-    const apiUrl = 'http://127.0.0.1:10000/translate'; // Correct API endpoint
+    // const apiUrl = 'http://127.0.0.1:10000/translate'; // Correct API endpoint
+    const apiUrl = 'https://political-speech-generator-5fln.onrender.com/translate';
 
     this.setState({ isLoading: true });
 

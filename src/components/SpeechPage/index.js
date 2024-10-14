@@ -151,31 +151,33 @@ class SpeechPage extends Component {
 
   render() {
     const { isLoading, generatedSpeech, selectedLanguage, translatedSpeech, speechError, requirementsError, selectedNewspaper, selectedState } = this.state;
-    const statesOfIndia = [ 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Puducherry'];
+    const statesOfIndia = [ 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Jammu and Kashmir', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Puducherry'];
     const newspapers = [ 'Deccan Chronicle' ];
 
     return (
       <div className="container">
         {/* Newspaper Dropdown */}
         <div className="dropdown">
-          <label htmlFor="newspaper">Newspaper:</label>
-          <select id="newspaper" value={selectedNewspaper} onChange={this.handleNewspaperChange}>
-            <option value="">Select a newspaper</option>
-            {newspapers.map(newspaper => (
-              <option key={newspaper} value={newspaper}>{newspaper}</option>
-            ))}
-          </select>
+            <label htmlFor="newspaper">Newspaper:</label>
+            <select id="newspaper" value={selectedNewspaper} onChange={this.handleNewspaperChange}>
+                <option value="">Select a newspaper</option>
+                {newspapers.map(newspaper => (
+                    <option key={newspaper} value={newspaper}>{newspaper}</option>
+                ))}
+            </select>
         </div>
 
         {/* State Dropdown */}
         <div className="dropdown">
-          <label htmlFor="state">State:</label>
-          <select id="state" value={selectedState} onChange={this.handleStateChange}>
-            <option value="">Select a State</option>
-            {statesOfIndia.map(state => (
-              <option key={state} value={state}>{state}</option>
-            ))}
-          </select>
+            <label htmlFor="state">State:</label>
+            <select id="state" value={selectedState} onChange={this.handleStateChange}>
+                <option value="">Select a state</option>
+                {statesOfIndia.map(state => (
+                <option key={state} value={state.toLowerCase().replace(/\s+/g, '-')}>
+                    {state}
+                </option>
+                ))}
+            </select>
         </div>
 
         {/* Speech and Requirements Text Areas */}

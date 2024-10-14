@@ -173,9 +173,7 @@ class SpeechPage extends Component {
             <select id="state" value={selectedState} onChange={this.handleStateChange}>
                 <option value="">Select a state</option>
                 {statesOfIndia.map(state => (
-                <option key={state} value={state.toLowerCase().replace(/\s+/g, '-')}>
-                    {state}
-                </option>
+                    <option key={state} value={state}>{state}</option>
                 ))}
             </select>
         </div>

@@ -201,8 +201,61 @@ class SpeechPage extends Component {
           </div>
         )}
 
-        {/* Other sections remain the same */}
-        {/* ... */}
+        {/* Show spinner if isLoading is true */}
+        {isLoading && (
+          <div className="spinner-container">
+            <div>
+              <div className="spinner"></div>
+              <Typewriter
+                options={{
+                  strings: ['Generating Speech...'],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Show generated speech if available */}
+        {generatedSpeech.trim().length !== 0 && (
+          <>
+            <div className="text-container">
+              <div className="textbox">
+                <h1>Generated Speech:</h1>
+                <SpeechArea content={generatedSpeech} />
+              </div>
+
+
+              {/* Show translated speech if available */}
+              {translatedSpeech.trim().length !== 0 && (
+                <div className="textbox">
+                  <>
+                    <h1>Translated Speech:</h1>
+                    <SpeechArea content={translatedSpeech} />
+                  </>
+                </div>
+              )}
+            </div>
+            <>
+              <h1>Languages:</h1>
+              <select value={selectedLanguage} onChange={this.handleLanguageChange} className="language-dropdown">
+                <option value="Hindi">Hindi</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Bengali">Bengali</option>
+              </select>
+              <div className="language-dropdown-arrow"></div>
+              <button onClick={this.handleTranslate} className="translate-button">Translate</button>
+              <button onClick={() => { window.location.href = "/" }} className="clear-all-button">Back</button>
+            </>
+          </>
+        )}
+        {/* Button for clearing all input fields */}
+        {
+          // !isLoading && generatedSpeech.trim().length !== 0 && (
+          //   <button onClick={this.handleClearAll} className="clear-all-button">Clear All</button>
+          // )
+        }
       </div>
     );
   }

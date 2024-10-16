@@ -10,6 +10,7 @@ class SpeechPage extends Component {
     this.initialState = {
       speechTextareaValue: '',
       requirementsTextareaValue: '',
+      slogansTextareaValue: '',
       isLoading: false,
       generatedSpeech: '',
       selectedLanguage: 'Hindi',
@@ -23,6 +24,7 @@ class SpeechPage extends Component {
     
     this.handleSpeechTextareaChange = this.handleSpeechTextareaChange.bind(this);
     this.handleRequirementsTextareaChange = this.handleRequirementsTextareaChange.bind(this);
+    this.handleSlogansTextareaChange = this.handleSlogansTextareaChange.bind(this);
     this.handleSpeechFileInputChange = this.handleSpeechFileInputChange.bind(this);
     this.handleRequirementsFileInputChange = this.handleRequirementsFileInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,6 +41,10 @@ class SpeechPage extends Component {
 
   handleRequirementsTextareaChange(event) {
     this.setState({ requirementsTextareaValue: event.target.value });
+  }
+
+  handleSlogansTextareaChange(event){
+    this.setState({slogansTextareaValue: event.target.value});
   }
 
   handleSpeechFileInputChange(event) {
@@ -63,20 +69,20 @@ class SpeechPage extends Component {
 
   handleSubmit() {
     const apiUrl = 'http://127.0.0.1:10000/generate_speech'; // Correct API endpoint
-    const { speechTextareaValue, requirementsTextareaValue, selectedNewspaper, selectedState } = this.state;
+    const { speechTextareaValue, requirementsTextareaValue, selectedNewspaper, selectedState, slogansTextareaValue } = this.state;
   
     // Validate fields
-    if (speechTextareaValue.trim() === '') {
-      this.setState({ speechError: '* Speech field cannot be empty.' });
-      if (requirementsTextareaValue.trim() === '') {
-        this.setState({ requirementsError: '* Requirements field cannot be empty.' });
-      } else {
-        this.setState({ requirementsError: '' });
-      }
-      return;
-    } else {
-      this.setState({ speechError: '' });
-    }
+    // if (speechTextareaValue.trim() === '') {
+    //   this.setState({ speechError: '* Speech field cannot be empty.' });
+    //   if (requirementsTextareaValue.trim() === '') {
+    //     this.setState({ requirementsError: '* Requirements field cannot be empty.' });
+    //   } else {
+    //     this.setState({ requirementsError: '' });
+    //   }
+    //   return;
+    // } else {
+    //   this.setState({ speechError: '' });
+    // }
   
     if (requirementsTextareaValue.trim() === '') {
       this.setState({ requirementsError: '* Requirements field cannot be empty.' });
@@ -97,6 +103,7 @@ class SpeechPage extends Component {
     axios.post(apiUrl, {
       speech: speechTextareaValue,
       requirements: requirementsTextareaValue,
+      slogans: slogansTextareaValue,
       newspaper: selectedNewspaper, // Send newspaper value
       state: selectedState // Send state value
     })
@@ -152,12 +159,12 @@ class SpeechPage extends Component {
   render() {
     const { isLoading, generatedSpeech, selectedLanguage, translatedSpeech, speechError, requirementsError, selectedNewspaper, selectedState } = this.state;
     const statesOfIndia = [ 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Jammu and Kashmir', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Puducherry'];
-    const newspapers = [ 'Deccan Chronicle' ];
+    // const newspapers = [ 'Deccan Chronicle' ];
 
     return (
       <div className="container">
         {/* Newspaper Dropdown */}
-        <div className="dropdown">
+        {/* <div className="dropdown">
             <label htmlFor="newspaper">Newspaper:</label>
             <select id="newspaper" value={selectedNewspaper} onChange={this.handleNewspaperChange}>
                 <option value="">Select a newspaper</option>
@@ -165,7 +172,7 @@ class SpeechPage extends Component {
                     <option key={newspaper} value={newspaper}>{newspaper}</option>
                 ))}
             </select>
-        </div>
+        </div> */}
 
         {/* State Dropdown */}
         <div className="dropdown">
@@ -182,12 +189,12 @@ class SpeechPage extends Component {
         {!isLoading && generatedSpeech.trim().length === 0 && (
           <div>
             <div className="text-container">
-              <div className="textbox">
+              {/* <div className="textbox">
                 <h1>Speech:</h1>
                 <SpeechArea content={this.state.speechTextareaValue} onTextareaChange={this.handleSpeechTextareaChange} />
                 <input type="file" accept=".txt" onChange={this.handleSpeechFileInputChange} />
                 {speechError !== '' && <p className="error-message">{speechError}</p>}
-              </div>
+              </div> */}
               <div className="textbox">
                 <h1>Requirements:</h1>
                 <SpeechArea content={this.state.requirementsTextareaValue} onTextareaChange={this.handleRequirementsTextareaChange} />
